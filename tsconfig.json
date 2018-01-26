@@ -26,7 +26,8 @@
       "Game": ["Game/*"],
       "World": ["World/*"],
       "Map": ["Map/*"],
-      "Tile": ["Tile/*"]
+      "Tile": ["Tile/*"],
+      "Resource": ["Resource/*"]
     }
   },
   "exclude": [

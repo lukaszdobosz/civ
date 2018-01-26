@@ -9,7 +9,8 @@ export function generateTiles(size) {
 
     for ( let y = 0; y < size.height; y++) {
       tiles[x][y] = {
-        type: Math.round(Math.random() * 3)
+        type: Math.round(Math.random() * 3),
+        resource: Math.round(Math.random() * 2) + 1
       }
     }
   }

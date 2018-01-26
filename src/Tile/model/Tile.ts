@@ -5,6 +5,12 @@ export enum TileType {
   SNOW = 3
 }
 
+export enum TileResource {
+  FOREST = 1,
+  GOLD = 2
+}
+
 export type Tile = Readonly<{
-  type: TileType
+  type: TileType,
+  resource: TileResource | null
 }>;
