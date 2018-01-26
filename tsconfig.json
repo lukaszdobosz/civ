@@ -1,0 +1,38 @@
+{
+  "compilerOptions": {
+    "outDir": "./built",
+    "baseUrl": "./src",
+    "allowJs": true,
+    "target": "es5",
+    "jsx": "react",
+    "sourceMap": true,
+    "module": "commonjs",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": false,
+    "moduleResolution": "node",
+    "types": ["node"],
+    "lib": [
+      "dom",
+      "es6",
+      "dom.iterable",
+      "scripthost"
+    ],
+    "typeRoots": [ "../node_modules/@types" ],
+    "noImplicitAny": false,
+    "strictNullChecks": false,
+    "noUnusedLocals": true,
+    "paths": {
+      "App": ["App/*"],
+      "Game": ["Game/*"],
+      "World": ["World/*"],
+      "Map": ["Map/*"],
+      "Tile": ["Tile/*"]
+    }
+  },
+  "exclude": [
+    "node_modules",
+    "builder",
+    "build",
+    "test"
+  ]
+}
