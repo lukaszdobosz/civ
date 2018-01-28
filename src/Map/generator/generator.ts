@@ -8,9 +8,12 @@ export function generateTiles(size) {
     tiles[x] = [];
 
     for ( let y = 0; y < size.height; y++) {
+
+      const rand = Math.round(Math.random() * 2);
+
       tiles[x][y] = {
         type: Math.round(Math.random() * 3),
-        resource: Math.round(Math.random() * 2) + 1
+        resource: rand ? { type: rand } : null
       }
     }
   }

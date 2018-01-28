@@ -80,6 +80,8 @@ module.exports = {
     alias: {
       'react-native': 'react-native-web',
       'App': path.resolve('src/App'),
+      'Assets': path.resolve('src/Assets'),
+      'Isometric': path.resolve('src/Isometric'),
       'Game': path.resolve('src/Game'),
       'World': path.resolve('src/World'),
       'Map': path.resolve('src/Map'),

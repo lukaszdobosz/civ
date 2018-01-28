@@ -19,12 +19,12 @@ const mapDispatchToProps = (dispatch) => ({
 class GamePure extends React.Component<Props, State> {
 
   componentWillMount() {
-    this.props.initMap(10, 10);
+    this.props.initMap(20, 20);
   }
 
   render() {
     return (
-      <Svg width='100%' height='100%'>
+      <Svg width='100%' height='100%' xmlns="http://www.w3.org/2000/svg">
         <Map />
       </Svg>
     );

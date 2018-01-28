@@ -6,6 +6,8 @@ import { MapState } from 'Map/State';
 import { Tile } from 'Tile/component';
 import { MapWrapper } from './Map.s';
 import { generateTiles } from 'Map/generator';
+import { Resource } from 'Resource/component';
+// import { ISO_ANGLE } from 'Isometric/const';
 
 type StateProps = {
   size: MapState.Size
@@ -32,31 +34,54 @@ class MapPure extends React.Component<Props, State> {
     this.props.setTiles(generateTiles(this.props.size));
   }
 
-  renderMap() {
-    const map = [];
+  renderTiles() {
+    const tiles = [];
 
-    for ( let x = 0; x < this.props.size.width; x++) {
-      map[x] = [];
+    for (let x = 0; x < this.props.size.width; x++) {
+      tiles[ x ] = [];
 
-      for ( let y = 0; y < this.props.size.height; y++) {
-        map[x][y] =
+      for (let y = 0; y < this.props.size.height; y++) {
+        tiles[ x ][ y ] =
           <Tile
-            key={ `${ x }-${ y }` }
-            x={ x }
-            y={ y }
+            key={`${ x }-${ y }`}
+            x={x}
+            y={y}
+            xCorner={ x === this.props.size.width - 1 }
+            yCorner={ y === this.props.size.height - 1 }
           />;
       }
     }
 
-    return map;
+    return tiles;
+  }
+
+  renderResources() {
+    const resources = [];
+
+    for (let x = 0; x < this.props.size.width; x++) {
+      resources[ x ] = [];
+
+      for (let y = 0; y < this.props.size.height; y++) {
+        resources[ x ][ y ] =
+          <Resource
+            key={`${ x }-${ y }`}
+            x={x}
+            y={y}
+          />
+      }
+    }
+
+    return resources;
   }
 
   render() {
-    return <MapWrapper>
-      { this.renderMap() }
+    return <MapWrapper transform='translate(700, 200)'>
+
+     { this.renderTiles() }
+    {/* { this.renderResources() }*/}
+
     </MapWrapper>
   }
 }
-
 
 export const Map = connect(mapStateToProps, mapDispatchToProps)(MapPure);

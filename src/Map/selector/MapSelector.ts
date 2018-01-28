@@ -21,4 +21,11 @@ export namespace MapSelector {
         (tiles) => tiles && tiles[x][y]
       );
 
+  export const selectResource =
+    (x: number, y: number) =>
+      createSelector(
+        selectTile(x, y),
+        (tile) => tile && tile.resource
+      );
+
 }

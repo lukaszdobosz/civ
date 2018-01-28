@@ -23,6 +23,8 @@
     "noUnusedLocals": true,
     "paths": {
       "App": ["App/*"],
+      "Assets": ["Assets/*"],
+      "Isometric": ["Isometric/*"],
       "Game": ["Game/*"],
       "World": ["World/*"],
       "Map": ["Map/*"],

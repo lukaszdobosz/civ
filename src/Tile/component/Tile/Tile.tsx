@@ -2,10 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { Tile as TileModel } from 'Tile/model';
 import { MapSelector } from 'Map/selector';
-import { Rect } from './Tile.s';
-import { Resource } from 'Resource/component';
-
-const TILE_SIZE = 80;
+import { TileCorner } from 'Assets/component';
 
 type StateProps = {
   tile: TileModel
@@ -15,12 +12,14 @@ type DispatchProps = {}
 
 type Props = StateProps & DispatchProps & {
   x: number,
-  y: number
+  y: number,
+  xCorner: boolean,
+  yCorner: boolean,
 };
 
 type State = {};
 
-const mapStateToProps = (state, ownProps): State => ({
+const mapStateToProps = (state, ownProps): StateProps => ({
   tile: MapSelector.selectTile(ownProps.x, ownProps.y)(state),
 });
 
@@ -29,35 +28,22 @@ class TilePure extends React.Component<Props, State> {
   render() {
     const { tile, x, y } = this.props;
 
-    console.log('tile', this.props.tile);
+    console.log('tile', tile);
 
-    const colors = [ 'red', 'green', 'teal', 'cyan' ];
 
     return (
-      <g>
-        <Rect
-          x={x * TILE_SIZE}
-          y={y * TILE_SIZE}
-          width={TILE_SIZE}
-          height={TILE_SIZE}
-          fill={colors[ tile.type ]}
-          onClick={() => this.handleClick()}
-        />
-
-        { tile.resource &&
-          <Resource
-            resource={ tile.resource }
-            tileX={ x * TILE_SIZE }
-            tileY={ y * TILE_SIZE }
-          />
-        }
-
-      </g>
+      <TileCorner
+        x={ x }
+        y={ y }
+        xCorner={ this.props.xCorner }
+        yCorner={ this.props.yCorner }
+        onClick={() => this.handleClick()}
+      />
     );
   }
 
   handleClick() {
-    console.log('clicked', this.props.x, this.props.y);
+    console.log('tile: ', this.props.x, this.props.y);
   }
 }
 
