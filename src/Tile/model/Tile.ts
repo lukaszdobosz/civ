@@ -4,7 +4,8 @@ import { Resource } from 'Resource/model';
 export enum TileType {
   GRASS = 1,
   SAND = 2,
-  SNOW = 3
+  SNOW = 3,
+  MOUNTAIN = 4
 }
 
 export enum TileResource {

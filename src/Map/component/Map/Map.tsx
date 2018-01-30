@@ -75,9 +75,11 @@ class MapPure extends React.Component<Props, State> {
   }
 
   render() {
-    return <MapWrapper transform='translate(700, 200)'>
+    return <MapWrapper transform='translate(1200, 400)'>
 
-     { this.renderTiles() }
+
+
+      { this.renderTiles() }
     {/* { this.renderResources() }*/}
 
     </MapWrapper>

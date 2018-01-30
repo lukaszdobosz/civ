@@ -1,8 +1,9 @@
 import glamorous from 'glamorous';
 
-export const Rect = glamorous.rect({
+export const TileWrapper = glamorous.g({
 
   ':hover': {
-    fill: 'red'
+
+    '& rect': { fill: '#88c311' }
   }
 });

@@ -1,25 +1,24 @@
 import * as React from 'react';
 
-import { Rect } from './TileCorner.s';
 import { ISO_FACTOR } from 'Isometric/const';
+
+const colors = [ '#77b200', '#bbb200', '#337788', '#ddeeff' ];
 
 export const TileCorner = (props) => {
 
   const TILE_WIDTH = 36;
   const TILE_HEIGHT = 36 * ISO_FACTOR;
 
-  const x = TILE_HEIGHT * (props.x - props.y);
-  const y = (props.x + props.y ) * TILE_WIDTH / 2;
+
 
   return <g xmlns="http://www.w3.org/2000/svg"
      width={ TILE_WIDTH}
      height={ TILE_HEIGHT }
-     transform={` translate(${ x }, ${ y })`}
   >
 
-    <Rect
-      fill={'green'}
-      stroke='green'
+    <rect
+      fill={ colors[props.type] }
+      stroke={ colors[props.type] }
       width={ TILE_WIDTH}
       height={ TILE_HEIGHT }
       x={0}
