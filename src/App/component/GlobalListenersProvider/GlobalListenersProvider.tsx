@@ -52,11 +52,9 @@ class GlobalListenersProviderPure extends React.Component<Props> {
   }
 
   handleZoom(ev) {
-    if (this.props.isControlPressed) {
-      ev.preventDefault();
+    ev.preventDefault();
 
-      this.props.setZoom(ev.deltaY);
-    }
+    this.props.setZoom(ev.deltaY);
   }
 }
 

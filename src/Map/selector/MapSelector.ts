@@ -19,6 +19,45 @@ export namespace MapSelector {
     (map) => map && map.zoom
   );
 
+  export const selectViewBoxX = createSelector(
+    selectZoom,
+    zoom => {
+      const halfWidth = window.outerWidth / 2;
+      const stepX = halfWidth - (halfWidth * (1 / zoom));
+
+      return -halfWidth + stepX;
+    }
+  );
+
+  export const selectViewBoxY = createSelector(
+    selectZoom,
+    zoom => {
+      const quarterHeight = window.outerHeight / 4;
+      const heightStepFactor = window.outerHeight / (3/2);
+      const stepY = heightStepFactor - (heightStepFactor * (1 / zoom));
+
+      return -quarterHeight + stepY;
+    }
+  );
+
+  export const selectViewBoxWidth = createSelector(
+    selectZoom,
+    zoom => window.outerWidth * (1 / zoom)
+  );
+
+  export const selectViewBoxHeight = createSelector(
+    selectZoom,
+    zoom => window.outerHeight * (1 / zoom)
+  );
+
+  export const selectViewBox = createSelector(
+    selectViewBoxX,
+    selectViewBoxY,
+    selectViewBoxWidth,
+    selectViewBoxHeight,
+    (x, y, width, height) => `${ x } ${ y } ${ width } ${ height }`
+  );
+
   export const selectTile =
     (x: number, y: number) =>
       createSelector(

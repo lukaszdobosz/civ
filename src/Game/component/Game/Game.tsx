@@ -6,7 +6,8 @@ import { Svg } from './Game.s';
 import { MapSelector } from 'Map/selector';
 
 type StateProps = {
-  zoom: number
+  zoom: number,
+  viewBox: string
 };
 
 type DispatchProps = {
@@ -17,7 +18,8 @@ type Props = StateProps & DispatchProps & {};
 type State = {};
 
 const mapStateToProps = (state): StateProps => ({
-  zoom: MapSelector.selectZoom(state)
+  zoom: MapSelector.selectZoom(state),
+  viewBox: MapSelector.selectViewBox(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -33,11 +35,10 @@ class GamePure extends React.Component<Props, State> {
   render() {
     return (
       <Svg
+        xmlns='http://www.w3.org/2000/svg'
         width='100%'
         height='100%'
-        viewBox={`0 0 2000 1200`}
-        xmlns='http://www.w3.org/2000/svg'
-        transform={`scale(${ this.props.zoom })`}
+        viewBox={ this.props.viewBox }
       >
         <Map />
       </Svg>
