@@ -7,7 +7,7 @@ import { MapAction } from '../action/MapAction';
 const initMapReducer: Reducer<any> = (state, action) => action.size;
 const setTilesReducer: Reducer<any> = (state, action) => action.tiles;
 const setZoomReducer: Reducer<any> = (state, action) =>
-  action.deltaY > 0 ?
+  action.deltaY < 0 ?
     state < 3 ? state + (state / 10) : state :
     state > 1 ? state - (state / 10) : state;
 
