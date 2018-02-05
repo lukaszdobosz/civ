@@ -11,14 +11,12 @@ export function generateTiles(size) {
   const rand3 = Math.round(Math.random());
 
   const seed = 'F' + vars[rand1] + vars[rand2] + vars[rand3];
-  const depth = 6 + Math.round(Math.random() * 3);
+  const depth = Math.round(5.5 + (Math.random() * 3));
 
   console.log('depth', depth);
   console.log('seed', seed);
 
   const dragon = dragonCurve(depth, seed);
-
-  console.log(dragon.length)
 
   for (let x = 0; x < size; x++) {
     tiles.push([]);
