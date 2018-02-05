@@ -14,6 +14,11 @@ export namespace MapSelector {
     (map) => map && map.tiles
   );
 
+  export const selectZoom = createSelector(
+    selectDomain,
+    (map) => map && map.zoom
+  );
+
   export const selectTile =
     (x: number, y: number) =>
       createSelector(

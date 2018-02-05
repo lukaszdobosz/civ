@@ -2,17 +2,16 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { Tile as TileModel, TileType } from 'Tile/model';
 import { MapSelector } from 'Map/selector';
-import { TileCorner, Mountain } from 'Assets/component';
-import { Forest } from 'Assets/component';
+import { TileCorner, Mountain, Forest, City } from 'Assets/component';
 import { ISO_FACTOR } from 'Isometric/const';
 import { TileWrapper } from './Tile.s';
 import { ResourceType } from 'Resource/model';
 
 type StateProps = {
   tile: TileModel
-}
+};
 
-type DispatchProps = {}
+type DispatchProps = {};
 
 type Props = StateProps & DispatchProps & {
   x: number,
@@ -35,15 +34,13 @@ class TilePure extends React.Component<Props, State> {
   render() {
     const { tile } = this.props;
 
-    console.log('tile', tile);
-
     const x = TILE_HEIGHT * (this.props.x - this.props.y);
     const y = (this.props.x + this.props.y ) * TILE_WIDTH / 2;
 
     return (
       <TileWrapper transform={` translate(${ x }, ${ y })`}>
-        { tile.type === TileType.MOUNTAIN ?
-          <Mountain /> :
+        {tile.type === TileType.MOUNTAIN ?
+          <Mountain/> :
           <TileCorner
             type={tile.type}
             xCorner={this.props.xCorner}
@@ -52,13 +49,14 @@ class TilePure extends React.Component<Props, State> {
           />
         }
 
-        { tile.resource && tile.resource.type === ResourceType.FOREST && <Forest /> }
+        {tile.resource && tile.resource.type === ResourceType.FOREST && <Forest/>}
+        {tile.city && <City />}
       </TileWrapper>
     );
   }
 
   handleClick() {
-    console.log('tile: ', this.props.x, this.props.y);
+    console.log('tile: ', this.props.x, this.props.y, this.props.tile.type);
   }
 }
 

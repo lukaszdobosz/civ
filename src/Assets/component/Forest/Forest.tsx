@@ -9,6 +9,6 @@ export const Forest: React.SFC<{}> = (props) => {
      <Tree transform={`scale(.7) translate(${ -25 }, ${ 0 })`}/>
      <Tree transform={`scale(.6) translate(${ -0 }, ${ 0 })`}/>
    </g>
-  )
+  );
 
 };

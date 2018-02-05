@@ -7,9 +7,9 @@ import { ISO_FACTOR } from 'Isometric/const';
 
 type StateProps = {
   resource: ResourceModel
-}
+};
 
-type DispatchProps = {}
+type DispatchProps = {};
 
 type Props = StateProps & DispatchProps & {
   x: number,
@@ -32,17 +32,18 @@ class ResourcePure extends React.Component<Props, State> {
 
     const colors2 = [ '', 'yellow', 'pink', 'magenta' ];
 
-    return ( resource &&
-      <g>
-        <Rect
-          x={(x * TILE_WIDTH) + 10}
-          y={(y * TILE_HEIGHT) + 10}
-          width={15}
-          height={15}
-          fill={colors2[ resource.type ]}
-          onClick={() => this.handleClick()}
-        />
-      </g>
+    return ( resource ? (
+        <g>
+          <Rect
+            x={(x * TILE_WIDTH) + 10}
+            y={(y * TILE_HEIGHT) + 10}
+            width={15}
+            height={15}
+            fill={colors2[ resource.type ]}
+            onClick={() => this.handleClick()}
+          />
+        </g>
+      ) : null
     );
   }
 

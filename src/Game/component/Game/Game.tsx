@@ -3,23 +3,31 @@ import { connect } from 'react-redux';
 import { MapAction } from 'Map/action';
 import { Map } from 'Map/component';
 import { Svg } from './Game.s';
+import { MapSelector } from 'Map/selector';
 
+type StateProps = {
+  zoom: number
+};
 
 type DispatchProps = {
-  initMap: (width: number, height: number) => void
-}
+  initMap: (size: number) => void
+};
 
-type Props = DispatchProps & {};
+type Props = StateProps & DispatchProps & {};
 type State = {};
 
+const mapStateToProps = (state): StateProps => ({
+  zoom: MapSelector.selectZoom(state)
+});
+
 const mapDispatchToProps = (dispatch) => ({
-  initMap: (width, height) => dispatch(MapAction.initMap(width, height))
+  initMap: (size) => dispatch(MapAction.initMap(size))
 });
 
 class GamePure extends React.Component<Props, State> {
 
   componentWillMount() {
-    this.props.initMap(20, 20);
+    this.props.initMap(20);
   }
 
   render() {
@@ -28,12 +36,13 @@ class GamePure extends React.Component<Props, State> {
         width='100%'
         height='100%'
         viewBox={`0 0 2000 1200`}
-        xmlns="http://www.w3.org/2000/svg"
-        transform={`scale(2)`}>
+        xmlns='http://www.w3.org/2000/svg'
+        transform={`scale(${ this.props.zoom })`}
+      >
         <Map />
       </Svg>
     );
   }
 }
 
-export const Game = connect(null, mapDispatchToProps)(GamePure);
+export const Game = connect(mapStateToProps, mapDispatchToProps)(GamePure);

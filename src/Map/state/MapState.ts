@@ -3,16 +3,17 @@ import { Tile } from 'Tile/model';
 
 export namespace MapState {
 
-  export type Tiles = Array<Array<Tile>>
-  export type Size = { width: number, height: number }
+  export type Tiles = Array<Array<Tile>>;
 
   export type Type = {
-    size: Size,
-    tiles: Tiles
+    size: number,
+    tiles: Tiles,
+    zoom: number
   };
 
   export const Initial: Type = {
-    size: { width: null, height: null },
-    tiles: []
+    size: null,
+    tiles: [],
+    zoom: 1
   };
 }

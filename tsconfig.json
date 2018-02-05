@@ -20,7 +20,7 @@
     "typeRoots": [ "../node_modules/@types" ],
     "noImplicitAny": false,
     "strictNullChecks": false,
-    "noUnusedLocals": true,
+    "noUnusedLocals": false,
     "paths": {
       "App": ["App/*"],
       "Assets": ["Assets/*"],

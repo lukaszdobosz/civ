@@ -2,6 +2,7 @@
 import { Resource } from 'Resource/model';
 
 export enum TileType {
+  SEA = 0,
   GRASS = 1,
   SAND = 2,
   SNOW = 3,
@@ -15,5 +16,6 @@ export enum TileResource {
 
 export type Tile = Readonly<{
   type: TileType,
-  resource: Resource
+  resource?: Resource,
+  city?: any
 }>;

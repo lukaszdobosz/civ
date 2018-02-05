@@ -3,15 +3,20 @@ import { Tile } from 'Tile/model';
 export namespace MapAction {
   export const INIT_MAP = 'map/INIT_MAP';
   export const SET_TILES = 'map/SET_TILES';
+  export const SET_ZOOM = 'map/SET_ZOOM';
 
-  export const initMap = (width: number, height: number) => ({
+  export const initMap = (size: number) => ({
     type: INIT_MAP,
-    width,
-    height
+    size
   });
 
   export const setTiles = (tiles: Array<Array<Tile>>) => ({
     type: SET_TILES,
     tiles
+  });
+
+  export const setZoom = (deltaY) => ({
+    type: SET_ZOOM,
+    deltaY
   });
 }

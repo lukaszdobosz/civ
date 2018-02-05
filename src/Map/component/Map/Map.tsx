@@ -10,18 +10,18 @@ import { Resource } from 'Resource/component';
 // import { ISO_ANGLE } from 'Isometric/const';
 
 type StateProps = {
-  size: MapState.Size
-}
+  size: number
+};
 
 type DispatchProps = {
-  setTiles: (tiles) => void
-}
+  setTiles: (tiles: MapState.Tiles) => void
+};
 
 type Props = StateProps & DispatchProps & {};
 type State = {};
 
 const mapStateToProps = (state): StateProps => ({
-  size: MapSelector.selectSize(state)
+  size: MapSelector.selectSize(state),
 });
 
 const mapDispatchToProps = (dispatch): DispatchProps => ({
@@ -37,18 +37,19 @@ class MapPure extends React.Component<Props, State> {
   renderTiles() {
     const tiles = [];
 
-    for (let x = 0; x < this.props.size.width; x++) {
+    for (let x = 0; x < this.props.size; x++) {
       tiles[ x ] = [];
 
-      for (let y = 0; y < this.props.size.height; y++) {
-        tiles[ x ][ y ] =
+      for (let y = 0; y < this.props.size; y++) {
+        tiles[ x ][ y ] = (
           <Tile
             key={`${ x }-${ y }`}
             x={x}
             y={y}
-            xCorner={ x === this.props.size.width - 1 }
-            yCorner={ y === this.props.size.height - 1 }
-          />;
+            xCorner={x === this.props.size - 1}
+            yCorner={y === this.props.size - 1}
+          />
+        );
       }
     }
 
@@ -58,16 +59,17 @@ class MapPure extends React.Component<Props, State> {
   renderResources() {
     const resources = [];
 
-    for (let x = 0; x < this.props.size.width; x++) {
+    for (let x = 0; x < this.props.size; x++) {
       resources[ x ] = [];
 
-      for (let y = 0; y < this.props.size.height; y++) {
-        resources[ x ][ y ] =
+      for (let y = 0; y < this.props.size; y++) {
+        resources[ x ][ y ] = (
           <Resource
             key={`${ x }-${ y }`}
             x={x}
             y={y}
           />
+        );
       }
     }
 
@@ -75,14 +77,14 @@ class MapPure extends React.Component<Props, State> {
   }
 
   render() {
-    return <MapWrapper transform='translate(1200, 400)'>
+    return (
+      <MapWrapper transform='translate(1000, 300)'>
 
+        {this.renderTiles()}{/*
+        { this.renderResources() }*/}
 
-
-      { this.renderTiles() }
-    {/* { this.renderResources() }*/}
-
-    </MapWrapper>
+      </MapWrapper>
+    );
   }
 }
 
