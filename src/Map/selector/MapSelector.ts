@@ -19,24 +19,31 @@ export namespace MapSelector {
     (map) => map && map.zoom
   );
 
+  export const selectPan = createSelector(
+    selectDomain,
+    (map) => map && map.pan
+  );
+
   export const selectViewBoxX = createSelector(
     selectZoom,
-    zoom => {
+    selectPan,
+    (zoom, pan) => {
       const halfWidth = window.outerWidth / 2;
       const stepX = halfWidth - (halfWidth * (1 / zoom));
 
-      return -halfWidth + stepX;
+      return -halfWidth + stepX + pan.x / zoom;
     }
   );
 
   export const selectViewBoxY = createSelector(
     selectZoom,
-    zoom => {
+    selectPan,
+    (zoom, pan) => {
       const quarterHeight = window.outerHeight / 4;
       const heightStepFactor = window.outerHeight / (3/2);
       const stepY = heightStepFactor - (heightStepFactor * (1 / zoom));
 
-      return -quarterHeight + stepY;
+      return -quarterHeight + stepY + pan.y / zoom;
     }
   );
 
