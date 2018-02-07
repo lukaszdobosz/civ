@@ -2,7 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { Tile as TileModel, TileType } from 'Tile/model';
 import { MapSelector } from 'Map/selector';
-import { TileCorner, Mountain, Forest, City } from 'Assets/component';
+import { TileCorner, Mountain, Forest } from 'Assets/component';
 import { ISO_FACTOR } from 'Isometric/const';
 import { TileWrapper } from './Tile.s';
 import { ResourceType } from 'Resource/model';
@@ -49,14 +49,13 @@ class TilePure extends React.Component<Props, State> {
           />
         }
 
-        {tile.resource && tile.resource.type === ResourceType.FOREST && <Forest/>}
-        {tile.city && <City />}
+        {tile.resource && tile.resource.type === ResourceType.FOREST && <Forest tileType={ tile.type }/>}
       </TileWrapper>
     );
   }
 
   handleClick() {
-    console.log('tile: ', this.props.x, this.props.y, this.props.tile.type);
+    console.log('tile: ', this.props.x, this.props.y, this.props.tile);
   }
 }
 

@@ -86,6 +86,7 @@ module.exports = {
       'World': path.resolve('src/World'),
       'Map': path.resolve('src/Map'),
       'Tile': path.resolve('src/Tile'),
+      'City': path.resolve('src/City'),
       'Resource': path.resolve('src/Resource'),
     },
     plugins: [

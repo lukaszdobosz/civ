@@ -1,10 +1,18 @@
 import * as React from 'react';
+import { TileType } from 'Tile/model';
 
 type Props = {
   transform: string
+  tileType: TileType
 };
 
 export const Tree: React.SFC<Props> = (props) => {
+
+  const treeColors = {
+    [TileType.GRASS]: { main: '#33883b', shadow: '#1a6433' },
+    [TileType.SAND]: { main: '#ccbb3b', shadow: '#aa9933' },
+    [TileType.SNOW]: { main: '#bbddee', shadow: '#aaccdd' },
+  };
 
   return (
     <g transform={ props.transform }>
@@ -13,11 +21,11 @@ export const Tree: React.SFC<Props> = (props) => {
 
       <g transform={ `scale(2)` }>
         <path
-          style={{ fill: '#33883b' }}
+          style={{ fill: treeColors[props.tileType].main }}
           d={ 'M 3, 0 L 0, 10 3, 13 Z '}
         />
         <path
-          style={{ fill: '#1a6433' }}
+          style={{ fill: treeColors[props.tileType].shadow }}
           d={ 'M 3, 0 L 6, 10 3, 13 Z '}
         />
 

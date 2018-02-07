@@ -7,7 +7,7 @@ import { Tile } from 'Tile/component';
 import { MapWrapper } from './Map.s';
 import { generateTiles } from 'Map/generator';
 import { Resource } from 'Resource/component';
-// import { ISO_ANGLE } from 'Isometric/const';
+import { City } from 'City/component';
 
 type StateProps = {
   size: number
@@ -56,6 +56,27 @@ class MapPure extends React.Component<Props, State> {
     return tiles;
   }
 
+  renderCities() {
+    const cities = [];
+
+    for (let x = 0; x < this.props.size; x++) {
+      cities[ x ] = [];
+
+      for (let y = 0; y < this.props.size; y++) {
+        cities[ x ][ y ] = (
+          <City
+            key={`${ x }-${ y }`}
+            x={ x }
+            y={ y }
+          />
+        );
+      }
+    }
+
+    return cities;
+  }
+
+
   renderResources() {
     const resources = [];
 
@@ -80,7 +101,10 @@ class MapPure extends React.Component<Props, State> {
     return (
       <MapWrapper>
 
-        {this.renderTiles()}{/*
+        {this.renderTiles()}
+        {this.renderCities()}
+
+        {/*
         { this.renderResources() }*/}
 
       </MapWrapper>

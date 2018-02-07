@@ -29,6 +29,7 @@
       "World": ["World/*"],
       "Map": ["Map/*"],
       "Tile": ["Tile/*"],
+      "City": ["City/*"],
       "Resource": ["Resource/*"]
     }
   },
