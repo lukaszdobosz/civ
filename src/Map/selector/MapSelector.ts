@@ -72,6 +72,13 @@ export namespace MapSelector {
         (tiles) => tiles && tiles[x][y]
       );
 
+  export const selectTileType =
+    (x: number, y: number) =>
+      createSelector(
+        selectTile(x, y),
+        (tile) => tile && tile.type
+      );
+
   export const selectCity =
     (x: number, y: number) =>
       createSelector(
@@ -83,7 +90,7 @@ export namespace MapSelector {
     (x: number, y: number) =>
       createSelector(
         selectTile(x, y),
-        (tile) => tile && tile.resource
+        (tile) => tile && tile.resource ? tile.resource : null
       );
 
 }

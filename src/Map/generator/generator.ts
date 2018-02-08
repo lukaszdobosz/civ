@@ -60,19 +60,19 @@ export function generateTiles(size) {
 
       if (x < 0) {
         x = size - 1;
-        type = 1
+        type = nextType(type)
       }
       if (y < 0) {
         y = size - 1;
-        type = 2
+        type = nextType(type)
       }
       if (x > size - 1) {
         x = 0;
-        type = 3
+        type = nextType(type)
       }
       if (y > size - 1) {
         y = 0;
-        type = 1
+        type = nextType(type)
       }
 
     } else if (char === '+') {
@@ -106,6 +106,14 @@ export function generateTiles(size) {
   }
 
   return tiles;
+}
+
+function nextType(type) {
+  if (type < 4) {
+    return type + 1;
+  } else {
+    return 1;
+  }
 }
 
 function generateTile(type) {

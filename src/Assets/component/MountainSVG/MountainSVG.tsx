@@ -1,12 +1,16 @@
 import * as React from 'react';
+import { IsoSVG } from 'Isometric/component';
 
 type Props = {
+  x: number,
+  y: number
 };
 
-export const Mountain: React.SFC<Props> = (props) => {
+export const MountainSVG: React.SFC<Props> = (props) => {
 
   return (
-    <g transform={`scale(10) translate(-3, -2.2)`}>
+    <IsoSVG x={ props.x } y={ props.y }>
+      <g transform={`scale(10) translate(-3, -2.2)`}>
       <path
         style={{ fill: '#aaa' }}
         d={`M 3, 0 L 3, 6 0, 4 Z `}/>
@@ -21,6 +25,7 @@ export const Mountain: React.SFC<Props> = (props) => {
       <path
         style={{ fill: '#999' }}
         d={`M 3, 0 L 3, 3 4.5, 2 Z `}/>
-    </g>
+      </g>
+    </IsoSVG>
   );
 };

@@ -1,6 +1,7 @@
 import * as React from 'react';
 
-import { ISO_FACTOR } from 'Isometric/const';
+import { TILE_WIDTH, TILE_HEIGHT } from 'Tile/const';
+import { IsoSVG } from 'Isometric/component';
 
 const colors = [
   '#337788',
@@ -9,17 +10,10 @@ const colors = [
   '#ddeeff'
 ];
 
-export const TileCorner = (props) => {
-
-  const TILE_WIDTH = 36;
-  const TILE_HEIGHT = 36 * ISO_FACTOR;
+export const TileSVG = (props) => {
 
   return (
-    <g xmlns='http://www.w3.org/2000/svg'
-       width={TILE_WIDTH}
-       height={TILE_HEIGHT}
-    >
-
+    <IsoSVG x={ props.x } y={ props.y }>
       <rect
         fill={colors[ props.type ]}
         stroke={colors[ props.type ]}
@@ -52,6 +46,6 @@ export const TileCorner = (props) => {
           transform={`rotate(${ 30 }) skewX(30)`}
         />
       }
-    </g>
+    </IsoSVG>
   );
 };

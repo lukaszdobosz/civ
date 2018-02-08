@@ -104,8 +104,7 @@ class MapPure extends React.Component<Props, State> {
         {this.renderTiles()}
         {this.renderCities()}
 
-        {/*
-        { this.renderResources() }*/}
+        { this.renderResources() }
 
       </MapWrapper>
     );

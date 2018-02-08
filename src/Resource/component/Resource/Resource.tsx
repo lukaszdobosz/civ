@@ -1,12 +1,13 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { Rect } from './Resource.s';
 import { MapSelector } from 'Map/selector';
-import { Resource as ResourceModel } from 'Resource/model';
-import { ISO_FACTOR } from 'Isometric/const';
+import { Resource as ResourceModel, ResourceType } from 'Resource/model';
+import { ForestSVG } from 'Assets/component';
+import { TileType } from 'Tile/model';
 
 type StateProps = {
   resource: ResourceModel
+  tileType: TileType
 };
 
 type DispatchProps = {};
@@ -18,33 +19,22 @@ type Props = StateProps & DispatchProps & {
 
 type State = {};
 
-const TILE_WIDTH = 36;
-const TILE_HEIGHT = 36 * ISO_FACTOR;
-
 const mapStateToProps = (state, ownProps): StateProps => ({
   resource: MapSelector.selectResource(ownProps.x, ownProps.y)(state),
+  tileType: MapSelector.selectTileType(ownProps.x, ownProps.y)(state),
 });
 
 class ResourcePure extends React.Component<Props, State> {
 
+  renderResource() {
+    switch (this.props.resource.type) {
+      case ResourceType.FOREST:   return <ForestSVG tileType={ this.props.tileType } x={ this.props.x } y={ this.props.y }/>;
+      case ResourceType.GOLD:     return <text> error </text>;
+    }
+  }
+
   render() {
-    const { resource, x, y } = this.props;
-
-    const colors2 = [ '', 'yellow', 'pink', 'magenta' ];
-
-    return ( resource ? (
-        <g>
-          <Rect
-            x={(x * TILE_WIDTH) + 10}
-            y={(y * TILE_HEIGHT) + 10}
-            width={15}
-            height={15}
-            fill={colors2[ resource.type ]}
-            onClick={() => this.handleClick()}
-          />
-        </g>
-      ) : null
-    );
+    return this.props.resource && this.renderResource();
   }
 
   handleClick() {

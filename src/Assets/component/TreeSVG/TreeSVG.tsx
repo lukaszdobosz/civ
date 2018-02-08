@@ -6,12 +6,13 @@ type Props = {
   tileType: TileType
 };
 
-export const Tree: React.SFC<Props> = (props) => {
+export const TreeSVG: React.SFC<Props> = (props) => {
 
   const treeColors = {
     [TileType.GRASS]: { main: '#33883b', shadow: '#1a6433' },
     [TileType.SAND]: { main: '#ccbb3b', shadow: '#aa9933' },
     [TileType.SNOW]: { main: '#bbddee', shadow: '#aaccdd' },
+    [TileType.MOUNTAIN]: { main: '#bbddee', shadow: '#aaccdd' },
   };
 
   return (
