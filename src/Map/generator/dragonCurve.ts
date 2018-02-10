@@ -12,7 +12,7 @@ export const dragonCurve = (depth, seed?) => {
     if (dragon.charAt(i) === 'X') {
       newDragon += 'X+YF++';
     } else if (dragon.charAt(i) === 'Y') {
-      newDragon += '−FX−Y';
+      newDragon += 'FXY';
     } else {
       newDragon += dragon.charAt(i);
     }

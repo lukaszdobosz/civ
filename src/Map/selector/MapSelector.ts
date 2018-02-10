@@ -93,4 +93,11 @@ export namespace MapSelector {
         (tile) => tile && tile.resource ? tile.resource : null
       );
 
+  export const selectHasMountain =
+    (x: number, y: number) =>
+      createSelector(
+        selectTile(x, y),
+        (tile) => tile && tile.hasMountain ? tile.hasMountain : false
+      );
+
 }

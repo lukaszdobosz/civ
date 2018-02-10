@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { Tile as TileModel, TileType } from 'Tile/model';
+import { Tile as TileModel } from 'Tile/model';
 import { MapSelector } from 'Map/selector';
-import { TileSVG, MountainSVG } from 'Assets/component';
+import { TileSVG } from 'Assets/component';
 import { TileWrapper } from './Tile.s';
 
 type StateProps = {
@@ -31,17 +31,14 @@ class TilePure extends React.Component<Props, State> {
 
     return (
       <TileWrapper>
-        {tile.type === TileType.MOUNTAIN ?
-          <MountainSVG x={ this.props.x } y={ this.props.y }/> :
-          <TileSVG
-            type={tile.type}
-            x={ this.props.x }
-            y={ this.props.y }
-            xCorner={this.props.xCorner}
-            yCorner={this.props.yCorner}
-            onClick={() => this.handleClick()}
-          />
-        }
+        <TileSVG
+          type={tile.type}
+          x={this.props.x}
+          y={this.props.y}
+          xCorner={this.props.xCorner}
+          yCorner={this.props.yCorner}
+          onClick={() => this.handleClick()}
+        />
       </TileWrapper>
     );
   }

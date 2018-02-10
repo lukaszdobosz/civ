@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { MapAction } from 'Map/action';
 import { MapSelector } from 'Map/selector';
 import { MapState } from 'Map/State';
-import { Tile } from 'Tile/component';
+import { Tile, Mountain } from 'Tile/component';
 import { MapWrapper } from './Map.s';
 import { generateTiles } from 'Map/generator';
 import { Resource } from 'Resource/component';
@@ -85,11 +85,16 @@ class MapPure extends React.Component<Props, State> {
 
       for (let y = 0; y < this.props.size; y++) {
         resources[ x ][ y ] = (
+          <g  key={`${ x }-${ y }`}>
           <Resource
-            key={`${ x }-${ y }`}
             x={x}
             y={y}
           />
+            <Mountain
+              x={x}
+              y={y}
+            />
+          </g>
         );
       }
     }

@@ -6,8 +6,7 @@ export enum TileType {
   SEA = 0,
   GRASS = 1,
   SAND = 2,
-  SNOW = 3,
-  MOUNTAIN = 4
+  SNOW = 3
 }
 
 export enum TileResource {

@@ -1,4 +1,3 @@
-
 import { dragonCurve } from './dragonCurve';
 
 export function generateTiles(size) {
@@ -10,7 +9,7 @@ export function generateTiles(size) {
   const rand2 = Math.round(Math.random());
   const rand3 = Math.round(Math.random());
 
-  const seed = 'F' + vars[rand1] + vars[rand2] + vars[rand3];
+  const seed = 'F' + vars[ rand1 ] + vars[ rand2 ] + vars[ rand3 ];
   const depth = Math.round(5.5 + (Math.random() * 3));
 
   console.log('depth', depth);
@@ -21,7 +20,7 @@ export function generateTiles(size) {
   for (let x = 0; x < size; x++) {
     tiles.push([]);
     for (let y = 0; y < size; y++) {
-      tiles[ x ][ y ] = 0;
+      tiles[ x ][ y ] = { type: 0 };
     }
   }
 
@@ -32,17 +31,25 @@ export function generateTiles(size) {
 
   for (let i = 0; i < dragon.length; i++) {
 
+    /* if( i >= size) {
+       break;
+     }*/
+
     const char = dragon[ i ];
 
     if (char === 'F') {
 
       if (x >= 0 && x < size && y >= 0 && y < size) {
 
-        tiles[ x ][ y ] = type;
-        tiles[ x - 1 ] && (tiles[ x - 1 ][ y - 1 ] = type);
-        tiles[ x - 1 ] && (tiles[ x - 1 ][ y + 1 ] = type);
-        tiles[ x + 1 ] && (tiles[ x + 1 ][ y - 1 ] = type);
-        tiles[ x + 1 ] && (tiles[ x + 1 ][ y + 1 ] = type);
+        tiles[ x ][ y ].type = type;
+        tiles[ x - 1 ] && tiles[ x - 1 ][ y - 1 ] && (tiles[ x - 1 ][ y - 1 ].type = type);
+        tiles[ x - 1 ] && tiles[ x - 1 ][ y + 1 ] && (tiles[ x - 1 ][ y + 1 ].type = type);
+        tiles[ x + 1 ] && tiles[ x + 1 ][ y - 1 ] && (tiles[ x + 1 ][ y - 1 ].type = type);
+        tiles[ x + 1 ] && tiles[ x + 1 ][ y + 1 ] && (tiles[ x + 1 ][ y + 1 ].type = type);
+
+        Math.random() < .05 && tiles[ x - 1 ]
+        && tiles[ x - 1 ][ y - 1 ]
+        && (tiles[ x - 1 ][ y - 1 ].hasMountain = true);
 
         if (dir === 1) {
           y = y + 1
@@ -64,7 +71,7 @@ export function generateTiles(size) {
       }
       if (y < 0) {
         y = size - 1;
-        type = nextType(type)
+        type = nextType(type,)
       }
       if (x > size - 1) {
         x = 0;
@@ -81,27 +88,24 @@ export function generateTiles(size) {
       } else {
         dir++;
       }
-    } else if (char === '-') {
-      if (dir === 1) {
-        dir = 4;
-      } else {
-        dir--;
-      }
     }
 
   }
 
-   for (let x = 0; x < size; x++) {
-    tiles.push([]);
+  for (let x = 0; x < size; x++) {
     for (let y = 0; y < size; y++) {
-      tiles[ x ][ y ] = averageTile(tiles, x, y)
+      const averageType = averageTile(tiles, x, y);
+      if (averageType === 0) {
+        tiles[ x ][ y ] = { type: averageType };
+      }
+
+      tiles[ x ][ y ].type = averageType
     }
   }
 
   for (let x = 0; x < size; x++) {
-    tiles.push([]);
     for (let y = 0; y < size; y++) {
-      tiles[ x ][ y ] = generateTile(tiles[ x ][ y ])
+      tiles[ x ][ y ] = generateTile(tiles, x, y, size)
     }
   }
 
@@ -109,20 +113,21 @@ export function generateTiles(size) {
 }
 
 function nextType(type) {
-  if (type < 4) {
+
+  if (type < 3) {
     return type + 1;
   } else {
     return 1;
   }
 }
 
-function generateTile(type) {
-  const tile: any = { type };
+function generateTile(tiles, x, y, size) {
+  const tile = tiles[ x ][ y ];
 
-  if (type > 0) {
-    if(Math.random() < .1) {
+  if (tile.type > 0 && tile.type < 4) {
+    if (Math.random() < .1) {
       tile.resource = { type: 1 }
-    } else if (Math.random() < .01) {
+    } else if (Math.random() < .02 && x > 0 && y > 0 && x < size - 1 && y < size - 1) {
       tile.city = { level: 1 }
     }
   }
@@ -173,11 +178,10 @@ function averageTile(tiles, x, y) {
 }
 
 function getTile(tiles, x, y) {
-
-  if (x < 0 || x > tiles.length || y < 0 || y > tiles.length) {
+  if (x < 0 || x >= tiles.length || y < 0 || y >= tiles.length) {
     return -1;
   }
 
-  return tiles[ x ][ y ];
+  return tiles[ x ][ y ].type;
 
 }
