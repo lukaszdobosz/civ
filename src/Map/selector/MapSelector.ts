@@ -28,38 +28,40 @@ export namespace MapSelector {
     selectZoom,
     selectPan,
     (zoom, pan) => {
-      const halfWidth = window.outerWidth / 2;
-      const stepX = halfWidth - (halfWidth * (1 / zoom));
+      const halfWidth = window.innerWidth / 2;
+      const stepX = halfWidth - (halfWidth / zoom);
 
       return -halfWidth + stepX + pan.x / zoom;
     }
   );
 
-  export const selectViewBoxY = createSelector(
+  export const selectViewBoxY = (tileSize) => createSelector(
+    selectSize,
     selectZoom,
     selectPan,
-    (zoom, pan) => {
-      const quarterHeight = window.outerHeight / 4;
-      const heightStepFactor = window.outerHeight / (3/2);
-      const stepY = heightStepFactor - (heightStepFactor * (1 / zoom));
+    (size, zoom, pan) => {
+      const halfHeight = window.innerHeight / 2;
+      const stepY = halfHeight - (halfHeight / zoom);
 
-      return -quarterHeight + stepY + pan.y / zoom;
+      const mapHalfHeight = size * tileSize / 2;
+
+      return -halfHeight + stepY + mapHalfHeight + pan.y / zoom;
     }
   );
 
   export const selectViewBoxWidth = createSelector(
     selectZoom,
-    zoom => window.outerWidth * (1 / zoom)
+    zoom => window.innerWidth / zoom
   );
 
   export const selectViewBoxHeight = createSelector(
     selectZoom,
-    zoom => window.outerHeight * (1 / zoom)
+    zoom => window.innerHeight / zoom
   );
 
-  export const selectViewBox = createSelector(
+  export const selectViewBox = (tileSize) => createSelector(
     selectViewBoxX,
-    selectViewBoxY,
+    selectViewBoxY(tileSize),
     selectViewBoxWidth,
     selectViewBoxHeight,
     (x, y, width, height) => `${ x } ${ y } ${ width } ${ height }`

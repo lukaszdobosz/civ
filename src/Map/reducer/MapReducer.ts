@@ -8,16 +8,20 @@ const initMapReducer: Reducer<any> = (state, action) => action.size;
 const setTilesReducer: Reducer<any> = (state, action) => action.tiles;
 const setZoomReducer: Reducer<any> = (state, action) =>
   action.deltaY < 0 ?
-    state < 3 ? state + (state / 10) : state :
+    state < 20 ? state + (state / 10) : state :
     state > 1 ? state - (state / 10) : state;
 
 const setPanReducer: Reducer<any> = (state, action) => {
-  const nextX = state.x - action.x;
+
+  const nextX = (state.x - action.x);
   const nextY = state.y - action.y;
 
+  const widthRange = (window.innerWidth / 2) + (window.innerWidth / 3) * action.zoom;
+  const heightRange = (window.innerHeight / 2) + (window.innerHeight / 3) * action.zoom;
+
   return ({
-    x: Math.abs(nextX) < (window.outerWidth / 1.25) ? nextX : state.x,
-    y: Math.abs(nextY) < (window.outerHeight / 1.5) ? nextY : state.y
+    x: Math.abs(nextX) < widthRange ? nextX : state.x,
+    y: Math.abs(nextY) < heightRange ? nextY : state.y
   });
 };
 

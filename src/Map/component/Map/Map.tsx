@@ -34,6 +34,28 @@ class MapPure extends React.Component<Props, State> {
     this.props.setTiles(generateTiles(this.props.size));
   }
 
+  renderGrid() {
+    let lines = [];
+
+    const halfSize = this.props.size / 2;
+
+    for (let x = -halfSize; x < halfSize; x++) {
+      lines.push(
+        <line key={ `x${x}` } x1={x * 360} y1={ -1000 } x2={ x * 360 } y2={ 1000 }
+              style={{ stroke: 'blue' }}/>
+      );
+    }
+
+    for (let y = -halfSize; y < halfSize; y++) {
+      lines.push(
+        <line key={ `y${y}` } x1={- 1000 } y1={ y * 360 } x2={ 1000 } y2={ y * 360 }
+              style={{ stroke: 'red' }}/>
+      );
+    }
+
+    return lines;
+  }
+
   renderTiles() {
     const tiles = [];
 
@@ -66,8 +88,8 @@ class MapPure extends React.Component<Props, State> {
         cities[ x ][ y ] = (
           <City
             key={`${ x }-${ y }`}
-            x={ x }
-            y={ y }
+            x={x}
+            y={y}
           />
         );
       }
@@ -75,7 +97,6 @@ class MapPure extends React.Component<Props, State> {
 
     return cities;
   }
-
 
   renderResources() {
     const resources = [];
@@ -85,11 +106,11 @@ class MapPure extends React.Component<Props, State> {
 
       for (let y = 0; y < this.props.size; y++) {
         resources[ x ][ y ] = (
-          <g  key={`${ x }-${ y }`}>
-          <Resource
-            x={x}
-            y={y}
-          />
+          <g key={`${ x }-${ y }`}>
+            <Resource
+              x={x}
+              y={y}
+            />
             <Mountain
               x={x}
               y={y}
@@ -105,11 +126,11 @@ class MapPure extends React.Component<Props, State> {
   render() {
     return (
       <MapWrapper>
-
+        {this.renderGrid()}
         {this.renderTiles()}
         {this.renderCities()}
+        {this.renderResources()}
 
-        { this.renderResources() }
 
       </MapWrapper>
     );

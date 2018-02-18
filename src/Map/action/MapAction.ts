@@ -21,9 +21,10 @@ export namespace MapAction {
     deltaY
   });
 
-  export const setPan = (x, y) => ({
+  export const setPan = (x, y, zoom) => ({
     type: SET_PAN,
     x,
-    y
+    y,
+    zoom
   });
 }

@@ -4,6 +4,7 @@ import { MapAction } from 'Map/action';
 import { Map } from 'Map/component';
 import { Svg } from './Game.s';
 import { MapSelector } from 'Map/selector';
+import { TILE_WIDTH } from 'Tile/const';
 
 type StateProps = {
   zoom: number,
@@ -19,7 +20,7 @@ type State = {};
 
 const mapStateToProps = (state): StateProps => ({
   zoom: MapSelector.selectZoom(state),
-  viewBox: MapSelector.selectViewBox(state)
+  viewBox: MapSelector.selectViewBox(TILE_WIDTH)(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -39,6 +40,7 @@ class GamePure extends React.Component<Props, State> {
         width='100%'
         height='100%'
         viewBox={ this.props.viewBox }
+        preserveAspectRatio="none"
       >
         <Map />
       </Svg>

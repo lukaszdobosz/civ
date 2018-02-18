@@ -3,16 +3,18 @@ import { connect } from 'react-redux';
 import { GlobalListenersAction } from 'App/action';
 import { GlobalListenersSelector } from 'App/selector';
 import { MapAction } from 'Map/action';
+import { MapSelector } from 'Map/selector';
 
 type StateProps = {
   isControlPressed: boolean;
+  zoom: number;
 };
 
 type DispatchProps = {
   setPressedKeyCode: (keyCode: string) => void;
   clearPressedKeyCode: (keyCode: string) => void;
   setZoom: (deltaY: number) => void;
-  setPan: (x: number, y: number) => void;
+  setPan: (x: number, y: number, zoom: number) => void;
 };
 
 type Props = StateProps & DispatchProps & {};
@@ -24,14 +26,15 @@ type State = {
 }
 
 const mapStateToProps = (state): StateProps => ({
-  isControlPressed: GlobalListenersSelector.selectIsKeyPressed('Control')(state)
+  isControlPressed: GlobalListenersSelector.selectIsKeyPressed('Control')(state),
+  zoom: MapSelector.selectZoom(state)
 });
 
 const mapDispatchToProps = (dispatch): DispatchProps => ({
   setPressedKeyCode: (keyCode: string) => dispatch(GlobalListenersAction.setPressedKeyCode(keyCode)),
   clearPressedKeyCode: (keyCode: string) => dispatch(GlobalListenersAction.clearPressedKeyCode(keyCode)),
   setZoom: (deltaY: number) => dispatch(MapAction.setZoom(deltaY)),
-  setPan: (x: number, y: number) => dispatch(MapAction.setPan(x, y))
+  setPan: (x: number, y: number, zoom: number) => dispatch(MapAction.setPan(x, y, zoom))
 });
 
 class GlobalListenersProviderPure extends React.Component<Props, State> {
@@ -94,7 +97,8 @@ class GlobalListenersProviderPure extends React.Component<Props, State> {
 
     this.props.setPan(
       ev.clientX - this.state.dragStartX,
-      ev.clientY - this.state.dragStartY
+      ev.clientY - this.state.dragStartY,
+      this.props.zoom
     );
 
     this.setState({

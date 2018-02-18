@@ -39,7 +39,7 @@ export const MountainSVG: React.SFC<Props> = (props) => {
         d={`M 3, 0 L 3, 6 0, 4 Z `}/>
       <path
         style={{ fill: mountainColors[props.tileType].shadow }}
-        d={`M 3, 0 L 2.9, 6 6, 4 Z `}/>
+        d={`M 3, 0 L 3, 6 6, 4 Z `}/>
 
       <path
         style={{ fill: mountainColors[props.tileType].peakMain }}

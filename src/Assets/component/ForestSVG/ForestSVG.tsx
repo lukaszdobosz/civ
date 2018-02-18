@@ -13,7 +13,7 @@ type Props = {
 export const ForestSVG: React.SFC<Props> = (props: Props) => {
 
   return (
-   <IsoSVG x={ props.x } y={ props.y }>
+   <IsoSVG x={ props.x } y={ props.y } style={{ pointerEvents: 'none' }}>
      <TreeSVG tileType={props.tileType} transform={`scale(.8) translate(${ -10 }, ${ -15 })`}/>
      <TreeSVG tileType={props.tileType} transform={`scale(.7) translate(${ -25 }, ${ 0 })`}/>
      <TreeSVG tileType={props.tileType} transform={`scale(.6) translate(${ -0 }, ${ 0 })`}/>
