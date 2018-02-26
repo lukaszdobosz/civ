@@ -1,4 +1,3 @@
-
 import { combineReducers, Reducer } from 'redux';
 import { handleAction } from 'redux-actions';
 import { MapState } from '../state/MapState';
@@ -6,22 +5,12 @@ import { MapAction } from '../action/MapAction';
 
 const initMapReducer: Reducer<any> = (state, action) => action.size;
 const setTilesReducer: Reducer<any> = (state, action) => action.tiles;
-const setZoomReducer: Reducer<any> = (state, action) =>
-  action.deltaY < 0 ?
-    state < 20 ? state + (state / 10) : state :
-    state > 1 ? state - (state / 10) : state;
+const setZoomReducer: Reducer<any> = (state, action) => action.zoom;
 
 const setPanReducer: Reducer<any> = (state, action) => {
-
-  const nextX = (state.x - action.x);
-  const nextY = state.y - action.y;
-
-  const widthRange = (window.innerWidth / 2) + (window.innerWidth / 3) * action.zoom;
-  const heightRange = (window.innerHeight / 2) + (window.innerHeight / 3) * action.zoom;
-
   return ({
-    x: Math.abs(nextX) < widthRange ? nextX : state.x,
-    y: Math.abs(nextY) < heightRange ? nextY : state.y
+    x: action.x,
+    y: action.y
   });
 };
 

@@ -16,15 +16,14 @@ export namespace MapAction {
     tiles
   });
 
-  export const setZoom = (deltaY) => ({
+  export const setZoom = (zoom) => ({
     type: SET_ZOOM,
-    deltaY
+    zoom
   });
 
-  export const setPan = (x, y, zoom) => ({
+  export const setPan = (x, y) => ({
     type: SET_PAN,
     x,
-    y,
-    zoom
+    y
   });
 }
